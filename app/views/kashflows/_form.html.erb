@@ -1,0 +1,22 @@
+<%= form_with(model: kashflow, local: true) do |form| %>
+  <% if kashflow.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(kashflow.errors.count, "error") %> prohibited this kashflow from being saved:</h2>
+
+      <ul>
+      <% kashflow.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :year %>
+    <%= form.number_field :year, id: :kashflow_year %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

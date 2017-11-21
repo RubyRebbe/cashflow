@@ -1,0 +1,39 @@
+<%= form_with(model: item, local: true) do |form| %>
+  <% if item.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(item.errors.count, "error") %> prohibited this item from being saved:</h2>
+
+      <ul>
+      <% item.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :trx_type, "item type" %>
+    <%= form.select :trx_type, [[ "expense", "expense"], [ "income", "income"]]%>
+  </div>
+
+  <div class="field">
+    <%= form.label :trx_date, "item date" %>
+    <%= form.date_select :trx_date, id: :item_trx_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :amount %>
+    <%= form.text_field :amount, id: :item_amount %>
+  </div>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name, id: :item_name %>
+  </div>
+
+	<%= hidden_field_tag(:kashflow_id, params["kashflow_id"] ) %>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

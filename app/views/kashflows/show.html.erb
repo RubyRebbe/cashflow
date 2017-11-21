@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<h1> Cashflow for year <%= @kashflow.year %> </h1>
+
+<hr>
+
+<h2> Cashflow Items: currently <%= @kashflow.items.length %> </h2>
+
+<table>
+	<thead>
+		<tr>
+			<th> transaction </th>
+			<th> date </th>
+			<th> amount </th>
+			<th> name </th>
+			<th> Edit </th>
+			<th> Destroy </th>
+		</tr>
+	</thead>
+	<% @kashflow.items.each do |item| %>
+		<% if item.trx_type == "expense" then %>
+		<tr style="color:red">
+		<% else %>
+		<tr style="color:green">
+		<% end %>
+			<td> <%= item.trx_type %> </td>
+			<td> <%= item.trx_date %> </td>
+			<td> <%= item.amount %> </td>
+			<td> <%= item.name %> </td>
+			<td> <%= link_to "Edit", edit_item_path( item ) %> </td>
+			<td> <%= link_to "Destroy", item, method: :delete, data: { confirm: 'Are you sure?' } %> </td>
+		</tr>
+	<% end %>
+		<tr style="color:purple">
+			<td> 
+				<%= link_to "create a new item", new_item_path( kashflow_id: @kashflow.id) %> 
+			</td>
+			<td>  </td>
+			<td>  </td>
+			<td>  </td>
+			<td>  </td>
+			<td>  </td>
+		</tr>
+</table>
+
+<hr>
+
+<%= link_to 'Edit', edit_kashflow_path(@kashflow) %> |
+<%= link_to 'Back', kashflows_path %>

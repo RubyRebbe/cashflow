@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Welcome to the Cashflow Application</h1>
+
+<p>
+	Cashflows are listed by year
+</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Year</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @kashflows.each do |kashflow| %>
+      <tr>
+        <td><%= kashflow.year %></td>
+        <td><%= link_to 'Show', kashflow %></td>
+        <td><%= link_to 'Edit', edit_kashflow_path(kashflow) %></td>
+        <td><%= link_to 'Destroy', kashflow, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Cashflow', new_kashflow_path %>

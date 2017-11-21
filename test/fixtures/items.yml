@@ -1,0 +1,27 @@
+# == Schema Information
+#
+# Table name: items
+#
+#  id          :integer          not null, primary key
+#  trx_type    :string
+#  trx_date    :date
+#  amount      :float
+#  name        :string
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  kashflow_id :integer
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  trx_type: MyString
+  trx_date: 2017-11-20
+  amount: 1.5
+  name: MyString
+
+two:
+  trx_type: MyString
+  trx_date: 2017-11-20
+  amount: 1.5
+  name: MyString
