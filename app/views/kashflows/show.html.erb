@@ -4,7 +4,18 @@
 
 <hr>
 
-<h2> Cashflow Items: currently <%= @kashflow.items.length %> </h2>
+<h2> Filter the item view by date range </h2>
+
+<%= form_with url:  @kashflow, method: :get, local: true  do |f| %>
+  start date: <%= f.date_field :start_date %>
+	end date: <%= f.date_field :end_date %>
+	<%= f.submit "filter items" %>
+<% end %>
+
+<br />
+<hr>
+
+<h2> Cashflow Items: <%= @range.length %> . <%= @title %> </h2>
 
 <table>
 	<thead>
@@ -12,12 +23,12 @@
 			<th> transaction </th>
 			<th> date </th>
 			<th> amount </th>
-			<th> name </th>
+			<th> description </th>
 			<th> Edit </th>
 			<th> Destroy </th>
 		</tr>
 	</thead>
-	<% @kashflow.items.each do |item| %>
+	<% @range.each do |item| %>
 		<% if item.trx_type == "expense" then %>
 		<tr style="color:red">
 		<% else %>
@@ -42,6 +53,16 @@
 			<td>  </td>
 		</tr>
 </table>
+
+<hr>
+<b> Balance </b> over date range:  <%= @kashflow.balance( @range ) %>
+
+<hr>
+<b>Note:</b> currently only works for entire range of items
+<br />
+First item for which balance <= 0:
+<br />
+<%= @kashflow.threshold(0).to_s %>
 
 <hr>
 

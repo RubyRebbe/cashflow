@@ -1,5 +1,7 @@
+require 'pp'
+
 class KashflowsController < ApplicationController
-  before_action :set_kashflow, only: [:show, :edit, :update, :destroy]
+  before_action :set_kashflow, only: [:show, :edit, :update, :destroy, :foo]
 
   # GET /kashflows
   # GET /kashflows.json
@@ -10,6 +12,11 @@ class KashflowsController < ApplicationController
   # GET /kashflows/1
   # GET /kashflows/1.json
   def show
+		@start_date = params[:start_date].blank? ? nil : Date.parse( params[:start_date] )
+		@end_date = params[:end_date].blank? ? nil : Date.parse( params[:end_date] )
+		@range = @kashflow.date_range( @start_date, @end_date )
+		@title = (@range.length == @kashflow.items.length) ?
+      "all" : "from #{@start_date} to #{@end_date}"
   end
 
   # GET /kashflows/new
@@ -61,6 +68,9 @@ class KashflowsController < ApplicationController
     end
   end
 
+	def foo
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_kashflow
@@ -69,6 +79,6 @@ class KashflowsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def kashflow_params
-      params.require(:kashflow).permit(:year)
+	  	params.require(:kashflow).permit(:year, :start_date, :end_date )
     end
 end
