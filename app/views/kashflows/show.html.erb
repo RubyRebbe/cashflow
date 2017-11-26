@@ -58,11 +58,9 @@
 <b> Balance </b> over date range:  <%= @kashflow.balance( @range ) %>
 
 <hr>
-<b>Note:</b> currently only works for entire range of items
-<br />
 First item for which balance <= 0:
 <br />
-<%= @kashflow.threshold(0).to_s %>
+<%= @kashflow.threshold( @range).to_s %>
 
 <hr>
 

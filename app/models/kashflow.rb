@@ -30,11 +30,11 @@ class Kashflow < ApplicationRecord
   end
 
   # first item/date on which balance <= limit, or nil
-  def threshold( limit )
+  def threshold( item_set, limit = 0)
     balance = 0
     item = nil
 
-    items.order( :trx_date).each { |i|
+    item_set.order( :trx_date).each { |i|
       balance = balance + i.signed_amount
 
       if balance <= limit then
@@ -43,6 +43,6 @@ class Kashflow < ApplicationRecord
       end
     }
 
-    item
+    item.nil? ? "none" : item
   end
 end

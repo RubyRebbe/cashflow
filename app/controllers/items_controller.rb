@@ -15,6 +15,7 @@ class ItemsController < ApplicationController
   # GET /items/new
   def new
     @item = Item.new
+    @kashflow = Kashflow.find( params[ "kashflow_id"])
   end
 
   # GET /items/1/edit
