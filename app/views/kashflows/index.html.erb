@@ -15,7 +15,7 @@
   </thead>
 
   <tbody>
-    <% @kashflows.each do |kashflow| %>
+    <% @kashflows.order( :year ).each do |kashflow| %>
       <tr>
         <td><%= kashflow.year %></td>
         <td><%= link_to 'Show', kashflow %></td>
@@ -29,3 +29,7 @@
 <br>
 
 <%= link_to 'New Cashflow', new_kashflow_path %>
+
+<hr>
+
+<%= link_to 'Back to welcome', welcome_kashflows_path %>

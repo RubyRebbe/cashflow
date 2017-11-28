@@ -9,7 +9,7 @@
 #
 
 class Kashflow < ApplicationRecord
-  has_many :items
+  has_many :items, dependent: :destroy
 
   def date_range( start_date, end_date )
     # items.find_all { |i| i.in_range( start_date, end_date ) }
@@ -39,10 +39,18 @@ class Kashflow < ApplicationRecord
 
       if balance <= limit then
         item = i
-	break
+	      break
       end
     }
 
     item.nil? ? "none" : item
+  end
+
+  def min_date
+    Date.new( year, 1, 1)
+  end
+
+  def max_date
+    Date.new( year, 12, 31)
   end
 end

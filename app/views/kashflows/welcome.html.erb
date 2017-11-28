@@ -1,0 +1,25 @@
+<h1> Welcome to the Cashflow app! </h1>
+
+<h2> Welcome page use guide: </h2>
+<ul>
+    <li>  if you are an authenticated user: </li>
+		  <ul>
+        <li> go to the list of cashflows by year </li>
+        <li> or logout </li>
+      </ul>
+    <li>  if you are registered but not authenticated, login </li>
+    <li>  if you are not registered, please register  </li>
+</ul>
+
+<h2> Welcome page use cases  </h2>
+
+<ul>
+  <% if current_user %>
+    <li> You are logged in! <%= current_user.email %> </li>
+    <li><%= link_to 'Log Out', sign_out_path, method: :delete %></li>
+    <li><%= link_to 'list of cashflows by year', kashflows_path %></li>
+  <% else %>
+    <li><%= link_to 'Log In', sign_in_path %></li>
+    <li><%= link_to 'Or register as a user', new_user_path %></li>
+  <% end %>
+</ul>

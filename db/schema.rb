@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171121044256) do
+ActiveRecord::Schema.define(version: 20171127172207) do
 
   create_table "items", force: :cascade do |t|
     t.string "trx_type"
@@ -25,6 +25,15 @@ ActiveRecord::Schema.define(version: 20171121044256) do
 
   create_table "kashflows", force: :cascade do |t|
     t.integer "year"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "email"
+    t.string "crypted_password"
+    t.string "password_salt"
+    t.string "persistence_token"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

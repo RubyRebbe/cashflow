@@ -68,7 +68,7 @@ class KashflowsController < ApplicationController
     end
   end
 
-	def foo
+	def welcome
   end
 
   private
