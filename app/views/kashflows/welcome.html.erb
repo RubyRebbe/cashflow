@@ -1,5 +1,7 @@
 <h1> Welcome to the Cashflow app! </h1>
 
+<% register = false %>
+
 <h2> Welcome page use guide: </h2>
 <ul>
     <li>  if you are an authenticated user: </li>
@@ -8,7 +10,9 @@
         <li> or logout </li>
       </ul>
     <li>  if you are registered but not authenticated, login </li>
+		<% if register then %>
 		<li>  if you are not registered, please register  </li>
+		<% end %>
 </ul>
 
 <h2> Welcome page use cases  </h2>
@@ -20,6 +24,8 @@
     <li><%= link_to 'list of cashflows by year', kashflows_path %></li>
   <% else %>
     <li><%= link_to 'Log In', sign_in_path %></li>
+		<% if register then %>
 		<li><%= link_to 'Or register as a user', new_user_path %></li>
+    <% end %>
   <% end %>
 </ul>

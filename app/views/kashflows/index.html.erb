@@ -10,15 +10,14 @@
   <thead>
     <tr>
       <th>Year</th>
-      <th colspan="3"></th>
+      <th colspan="2"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @kashflows.order( :year ).each do |kashflow| %>
       <tr>
-        <td><%= kashflow.year %></td>
-        <td><%= link_to 'Show', kashflow %></td>
+        <td><%= link_to kashflow.year, kashflow %></td>
         <td><%= link_to 'Edit', edit_kashflow_path(kashflow) %></td>
         <td><%= link_to 'Destroy', kashflow, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
