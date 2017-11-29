@@ -20,6 +20,7 @@ class ItemsController < ApplicationController
 
   # GET /items/1/edit
   def edit
+	  @kashflow = @item.kashflow
   end
 
   # POST /items

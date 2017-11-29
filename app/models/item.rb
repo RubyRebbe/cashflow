@@ -15,6 +15,9 @@
 class Item < ApplicationRecord
   belongs_to :kashflow
 
+	# volatile attribute, non-persistent
+  attr_accessor :balance
+
   def in_range( start_date, end_date )
     a = (start_date == nil) ? true : ( start_date <= trx_date )
     b = (end_date == nil) ? true : ( trx_date <= end_date )
@@ -28,6 +31,10 @@ class Item < ApplicationRecord
 
   def signed_amount
     sign*amount
+  end
+
+	def balance_color
+    ( balance > 0 ) ? "green" : "red"
   end
 
   def to_s

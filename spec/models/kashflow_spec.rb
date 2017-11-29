@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe Kashflow, :type => :model do
   before :all do
-    @kashflow = Kashflow.new
+    @kashflow = Kashflow.create
     @start_date = Date.new( 2017, 11, 23)
     @end_date = Date.new( 2017, 12, 31)
   end
@@ -18,7 +18,9 @@ describe Kashflow, :type => :model do
 
   it "date_range handles out of range items" do
     out_range = Item.new( trx_date: Date.new( 2016, 1, 1) )
+		out_range.save
     @kashflow.items << out_range 
+    @kashflow.save
     @kashflow.date_range( @start_date, @end_date ).should be_empty
   end
 

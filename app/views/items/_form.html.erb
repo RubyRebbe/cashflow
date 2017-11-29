@@ -18,7 +18,8 @@
 
   <div class="field">
     <%= form.label :trx_date, "item date" %>
-    <%= form.date_select :trx_date, id: :item_trx_date %>
+    <%= form.date_field :trx_date,
+	    min: @kashflow.min_date, max: @kashflow.max_date %>
   </div>
 
   <div class="field">

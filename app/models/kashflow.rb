@@ -29,6 +29,14 @@ class Kashflow < ApplicationRecord
     range.reduce( 0.0 ) { |s,i| s + i.signed_amount } 
   end
 
+	def running_balance( range )
+    s = 0
+		range.map { |i| 
+      s = s + i.signed_amount
+      { item: i, balance: s }
+    }
+  end
+
   # first item/date on which balance <= limit, or nil
   def threshold( item_set, limit = 0)
     balance = 0

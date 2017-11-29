@@ -15,6 +15,14 @@ class KashflowsController < ApplicationController
 		@start_date = params[:start_date].blank? ? nil : Date.parse( params[:start_date] )
 		@end_date = params[:end_date].blank? ? nil : Date.parse( params[:end_date] )
 		@range = @kashflow.date_range( @start_date, @end_date )
+
+		# following code could be put in Kashflow#date_range
+		sum = 0
+		@range.each { |i| 
+      sum = sum + i.signed_amount 
+			i.balance = sum 
+		}
+
 		@title = (@range.length == @kashflow.items.length) ?
       "all" : "from #{@start_date} to #{@end_date}"
   end
