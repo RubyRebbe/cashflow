@@ -8,7 +8,7 @@
         <li> or logout </li>
       </ul>
     <li>  if you are registered but not authenticated, login </li>
-    <li>  if you are not registered, please register  </li>
+		<!-- <li>  if you are not registered, please register  </li> -->
 </ul>
 
 <h2> Welcome page use cases  </h2>
@@ -20,6 +20,6 @@
     <li><%= link_to 'list of cashflows by year', kashflows_path %></li>
   <% else %>
     <li><%= link_to 'Log In', sign_in_path %></li>
-    <li><%= link_to 'Or register as a user', new_user_path %></li>
+		<!--  <li><%= link_to 'Or register as a user', new_user_path %></li> -->
   <% end %>
 </ul>

@@ -1,5 +1,7 @@
 {
   "name": "cashflow",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "heroku-cli": "^6.14.39"
+  }
 }
