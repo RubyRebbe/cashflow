@@ -1,0 +1,5 @@
+<% if item.trx_type == "income" then %>
+	  <%= link_to item.name[0..9], item, style: "color:green" %> 
+<% else %>
+	  <%= link_to item.name[0..9], item , style: "color:red" %> 
+<% end %>

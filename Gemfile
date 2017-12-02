@@ -66,3 +66,6 @@ end
 
 # user authentication
 gem 'authlogic'
+
+# a calendar view
+gem 'rails-calendar'

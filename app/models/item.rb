@@ -33,10 +33,6 @@ class Item < ApplicationRecord
     sign*amount
   end
 
-	def balance_color
-    ( balance > 0 ) ? "green" : "red"
-  end
-
   def to_s
     "#{trx_type} | #{trx_date} | #{amount} | #{name}"
   end

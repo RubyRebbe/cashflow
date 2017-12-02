@@ -1,4 +1,5 @@
 require 'pp'
+require "./lib/cashflow_month.rb"
 
 class KashflowsController < ApplicationController
   before_action :set_kashflow, only: [:show, :edit, :update, :destroy, :foo]
@@ -25,6 +26,8 @@ class KashflowsController < ApplicationController
 
 		@title = (@range.length == @kashflow.items.length) ?
       "all" : "from #{@start_date} to #{@end_date}"
+
+		@month = CashflowMonth.new( Date.new( 2017, 12, 1 ) )
   end
 
   # GET /kashflows/new

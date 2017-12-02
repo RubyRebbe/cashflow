@@ -1,0 +1,32 @@
+<p>
+<%= @month.date.strftime( "%B" ) %>
+<%= @month.date.year %>
+</p>
+
+<table>
+	<thead>
+		<tr>
+    <% Date::DAYNAMES.each { |d| %>
+			<th> <%= d %> </th>
+    <% } %>
+		</tr>
+	</thead>
+	<% @month.weeks.each { |w|  %>
+		<tr>
+      <% w.each { |d| %>
+				<td> 
+					<% if d[:date].blank? then %> 
+				  
+				  <% else %>
+						<b> <%= d[:date].day %> </b>
+						<br />
+						<% d[:items].each { |i| %>
+						  <%= render partial: "item", locals: { item: i } %>
+			      <% } %>
+				  <% end %>
+					<br />
+				</td>
+      <% } %>
+		</tr>
+  <% } %>
+</table>

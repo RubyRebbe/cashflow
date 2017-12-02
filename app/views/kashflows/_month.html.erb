@@ -1,0 +1,24 @@
+<p>
+<%= @month.date.strftime( "%B" ) %>
+<%= @month.date.year %>
+</p>
+
+<table>
+	<thead>
+		<tr>
+    <% Date::DAYNAMES.each { |d| %>
+			<th> <%= d %> </th>
+    <% } %>
+		</tr>
+	</thead>
+	<% @month.weeks.each { |w|  %>
+		<tr>
+      <% w.each { |d| %>
+				<td> 
+					<%= d.blank? ? "" : d.day %> 
+					<br />
+				</td>
+      <% } %>
+		</tr>
+  <% } %>
+</table>
