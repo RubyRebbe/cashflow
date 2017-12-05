@@ -24,6 +24,13 @@ class Kashflow < ApplicationRecord
     end
   end
 
+	def month_range( start_date, end_date )
+    k =  start_date.nil? ? 1 : start_date.month
+		m =  end_date.nil? ? 12 : end_date.month
+
+		k..m
+  end
+
   # balance over a date range of items
   def balance( range)
     range.reduce( 0.0 ) { |s,i| s + i.signed_amount } 

@@ -1,6 +1,6 @@
 <p>
-<%= @month.date.strftime( "%B" ) %>
-<%= @month.date.year %>
+<%= month.date.strftime( "%B" ) %>
+<%= month.date.year %>
 </p>
 
 <table>
@@ -11,7 +11,7 @@
     <% } %>
 		</tr>
 	</thead>
-	<% @month.weeks.each { |w|  %>
+	<% month.weeks.each { |w|  %>
 		<tr>
       <% w.each { |d| %>
 				<td> 

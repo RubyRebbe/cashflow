@@ -84,4 +84,6 @@ First item for which balance <= 0:
 
 <h2> Cashflow month view </h2>
 
-<%= render partial: 'kmonth' %>
+<% @months.each { |month| %>
+  <%= render partial: 'kmonth', locals: { month: month } %>
+<% } %>
