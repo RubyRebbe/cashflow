@@ -19,9 +19,10 @@
 				  
 				  <% else %>
 						<b> <%= d[:date].day %> </b>
-						<br />
+					  <br />
 						<% d[:items].each { |i| %>
-						  <%= render partial: "item", locals: { item: i } %>
+							<%= render partial: "item", locals: { item: i } %>
+					    <br />
 			      <% } %>
 				  <% end %>
 					<br />
