@@ -71,6 +71,29 @@ class Month
 		remaining_days + Array.new( pad )
   end
 
+  def first_xday_old( x )
+		o = offset( first_day.cwday )
+		aweek = (0..6).to_a.map { |i| offset( o + i ) }
+		r = aweek.find_index { |e| e ==  x }
+		first_day + r
+  end
+
+	# returns first date in month which matches day of week x
+	# argument x has dimension of offset of cwday
+  def first_xday( x )
+		o = offset( first_day.cwday )
+    i = ( x - o ) + ( ( x < o ) ? Month::DPW : 0 )
+
+		(first_day + i)
+  end
+
+  def nth_xday( x, n = 1 )
+		o = offset( first_day.cwday )
+    i = ( x - o ) + ( ( x < o ) ? Month::DPW : 0 )
+
+		(first_day + i) + (n - 1)*DPW
+  end
+
 	def to_s
 		weeks.map { |w| week_to_s( w ) }.reduce("") { |s,e|
       s + "\n" + e

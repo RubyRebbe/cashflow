@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171127172207) do
+ActiveRecord::Schema.define(version: 20171207172324) do
 
   create_table "items", force: :cascade do |t|
     t.string "trx_type"
@@ -25,6 +25,13 @@ ActiveRecord::Schema.define(version: 20171127172207) do
 
   create_table "kashflows", force: :cascade do |t|
     t.integer "year"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "recurrent_items", force: :cascade do |t|
+    t.date "start_date"
+    t.date "end_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

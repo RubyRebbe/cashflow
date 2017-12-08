@@ -54,4 +54,27 @@ describe Month do
 			( d.nil? or d.sunday? ).should == true
     }
   end
+
+	it "can calculate the first X-day of each month" do
+		x = 5 # Friday
+
+		# actual date of first friday of each month in 2017
+		expected = [ 6, 3, 3, 7, 5, 2, 7, 4, 1, 6, 3, 1 ] 
+
+		months = (1..12).to_a.map { |m| Month.new( Date.new( 2017, m) ) }
+		months.map { |m| m.first_xday( x ).day }.should == expected
+  end
+
+	it "can calculate the third Wednesday of each month" do
+		x = 5 # Friday
+		@month.nth_xday( x, 2 ).day.should == 10
+
+		# third Wednesday of each month in 2017
+		x = 3 # Wednesday
+		expected = [ 18, 15, 15, 19, 17, 21, 19, 16, 20, 18, 15, 20 ]
+
+		months = (1..12).to_a.map { |m| Month.new( Date.new( 2017, m) ) }
+		months.map { |m| m.nth_xday( x , 3).day }.should == expected
+
+  end
 end
