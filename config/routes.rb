@@ -3,6 +3,8 @@ Rails.application.routes.draw do
 
   resources :items
 
+  resources :recurrent_items
+
   resources :kashflows do
     collection do
       get 'welcome'

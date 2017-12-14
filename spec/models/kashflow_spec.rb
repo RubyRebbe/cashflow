@@ -1,3 +1,13 @@
+# == Schema Information
+#
+# Table name: kashflows
+#
+#  id         :integer          not null, primary key
+#  year       :integer
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
 require 'rails_helper'
 
 describe Kashflow, :type => :model do

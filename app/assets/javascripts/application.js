@@ -11,5 +11,13 @@
 // about supported directives.
 //
 //= require rails-ujs
+//= require jquery
+//= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
+$(document).ready( function() {
+  $('#hook').mouseover( function() {
+    alert( "hello Tsvi from jquery" );
+  } )
+});

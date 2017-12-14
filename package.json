@@ -2,6 +2,7 @@
   "name": "cashflow",
   "private": true,
   "dependencies": {
-    "heroku-cli": "^6.14.39"
+    "heroku-cli": "^6.14.39",
+    "jquery": "^3.2.1"
   }
 }

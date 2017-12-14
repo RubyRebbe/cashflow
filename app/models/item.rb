@@ -2,18 +2,20 @@
 #
 # Table name: items
 #
-#  id          :integer          not null, primary key
-#  trx_type    :string
-#  trx_date    :date
-#  amount      :float
-#  name        :string
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  kashflow_id :integer
+#  id                :integer          not null, primary key
+#  trx_type          :string
+#  trx_date          :date
+#  amount            :float
+#  name              :string
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#  kashflow_id       :integer
+#  recurrent_item_id :integer
 #
 
 class Item < ApplicationRecord
   belongs_to :kashflow
+  belongs_to :recurrent_item # optionally
 
 	# volatile attribute, non-persistent
   attr_accessor :balance
@@ -35,5 +37,9 @@ class Item < ApplicationRecord
 
   def to_s
     "#{trx_type} | #{trx_date} | #{amount} | #{name}"
+  end
+
+	def recurrent?
+		!recurrent_item.nil?
   end
 end

@@ -67,5 +67,4 @@ end
 # user authentication
 gem 'authlogic'
 
-# a calendar view
-gem 'rails-calendar'
+gem 'jquery-rails', '~> 4.3', '>= 4.3.1'
