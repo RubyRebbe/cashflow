@@ -1,3 +1,5 @@
+ActionController::Parameters.permit_all_parameters = true
+
 class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
 
@@ -31,8 +33,21 @@ class ItemsController < ApplicationController
   # POST /items.json
   def create
     @kashflow = Kashflow.find( params[ "kashflow_id"])
-    @item = Item.new(item_params)
-		@item.kashflow = @kashflow
+		@recurrence = params[:item][:recurrence]
+    @item = nil
+
+		if @recurrence == "ordinary" then
+      @item = Item.new( item_params )
+			@item.kashflow = @kashflow
+		elsif @recurrence == "by month day" then
+      @item = RecurrentItem.new
+			# stub out for now start and end dates
+			@item.start_date = Date.parse( params[:item][:trx_date] )
+			y = @item.start_date.year
+			@item.end_date = Date.new( y, 12, 31 )
+			@item.save
+			@item.create_by_monthday( item_params )
+    end
 
     respond_to do |format|
       if @item.save
@@ -81,6 +96,6 @@ class ItemsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def item_params
-      params.require(:item).permit(:trx_type, :trx_date, :amount, :name, :kashflow_id)
+      params.require(:item).permit(:trx_type, :trx_date, :amount, :name, :kashflow_id, :recurrent_item, :recurrence )
     end
 end

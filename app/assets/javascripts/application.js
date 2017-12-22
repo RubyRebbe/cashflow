@@ -18,6 +18,9 @@
 
 $(document).ready( function() {
   $('#hook').mouseover( function() {
-    alert( "hello Tsvi from jquery" );
+    alert( 
+      "hello Tsvi from jquery" + "\n" +
+       JSON.stringify( $('#hook').data() )
+		);
   } )
 });

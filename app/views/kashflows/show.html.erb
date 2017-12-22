@@ -4,7 +4,7 @@
 
 <hr>
 
-<h2> Filter the item view by date range </h2>
+<h2> Filter the item view by date range and view </h2>
 
 <%= form_with url:  @kashflow, method: :get, local: true  do |f| %>
   start date: 
@@ -13,59 +13,29 @@
 	end date: 
 	<%= f.date_field :end_date, value: @end_date,
 	  min: @kashflow.min_date, max: @kashflow.max_date %>
+  view:
+	<%= f.select :view, 
+		[[ "table", "table"], [ "calendar", "calendar"]] %>
 	<%= f.submit "filter items" %>
 <% end %>
 
 <br />
 <hr>
 
+<% view_toggle = params[:view].blank? ? "table" : params[:view] %>
+<% if view_toggle == "table" then %>
 <h2> Cashflow Items: <%= @range.length %> . <%= @title %> </h2>
 
-<table>
-	<thead>
-		<tr>
-			<th> transaction </th>
-			<th> date </th>
-			<th> amount </th>
-			<th> description </th>
-			<th> balance </th>
-			<th> Edit </th>
-			<th> Destroy </th>
-		</tr>
-	</thead>
-	<% @range.each do |item| %>
-		<% if item.trx_type == "expense" then %>
-		<tr style="color:red">
-		<% else %>
-		<tr style="color:green">
-		<% end %>
-			<td> <%= item.trx_type %> </td>
-			<td> <%= item.trx_date %> </td>
-			<td> <%= item.amount %> </td>
-			<td> <%= item.name %> </td>
+<%= render partial: 'table'  %>
+<% else %>
 
-			<% if item.balance > 0 then %>
-			  <td style="color:green" %> <%= item.balance %> </td>
-			<% else %>
-			  <td style="color:red" %> <%= item.balance %> </td>
-			<% end %>
+<h2> Cashflow month view </h2>
 
-			<td> <%= link_to "Edit", edit_item_path( item ) %> </td>
-			<td> <%= link_to "X", item, method: :delete, data: { confirm: 'Are you sure?' } %> </td>
-		</tr>
-	<% end %>
-		<tr style="color:purple">
-			<td> 
-				<%= link_to "create a new item", new_item_path( kashflow_id: @kashflow.id) %> 
-			</td>
-			<td>  </td>
-			<td>  </td>
-			<td>  </td>
-			<td>  </td>
-			<td>  </td>
-			<td>  </td>
-		</tr>
-</table>
+<% @months.each { |month| %>
+  <%= render partial: 'kmonth', locals: { month: month } %>
+<% } %>
+
+<% end  %>
 
 <hr>
 <b> Balance </b> over date range:  <%= @kashflow.balance( @range ) %>
@@ -82,8 +52,3 @@ First item for which balance <= 0:
 
 <hr>
 
-<h2> Cashflow month view </h2>
-
-<% @months.each { |month| %>
-  <%= render partial: 'kmonth', locals: { month: month } %>
-<% } %>

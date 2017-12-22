@@ -15,10 +15,10 @@
 
 class Item < ApplicationRecord
   belongs_to :kashflow
-  belongs_to :recurrent_item # optionally
+  belongs_to :recurrent_item, optional: true
 
 	# volatile attribute, non-persistent
-  attr_accessor :balance
+  attr_accessor :balance, :recurrence
 
   def in_range( start_date, end_date )
     a = (start_date == nil) ? true : ( start_date <= trx_date )

@@ -12,6 +12,8 @@
 class RecurrentItem < ApplicationRecord
   has_many :items, dependent: :destroy
 
+  attr_accessor  :recurrence
+
   def valid_year?
 		start_date.year == end_date.year
   end
@@ -37,8 +39,11 @@ class RecurrentItem < ApplicationRecord
 		}.find_all { |d| in_range?( d ) }
   end
 
-	def create_by_monthday
-		dates_by_monthday.each { |d| items.create( trx_date: d ) }
+	def create_by_monthday( item_params )
+		dates_by_monthday.each { |d| 
+      item_params[:trx_date] = d
+      items.create( item_params )
+		}
   end
 
 	def create_by_weekday( weekday, nth )

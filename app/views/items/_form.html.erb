@@ -12,6 +12,12 @@
   <% end %>
 
   <div class="field">
+    <%= form.label :recurrence, "recurrence" %>
+		<%= form.select :recurrence, 
+      [[ "ordinary", "ordinary"], [ "by month day", "by month day"]]%>
+  </div>
+
+  <div class="field">
     <%= form.label :trx_type, "item type" %>
     <%= form.select :trx_type, [[ "expense", "expense"], [ "income", "income"]]%>
   </div>
