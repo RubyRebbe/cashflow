@@ -41,12 +41,18 @@ class ItemsController < ApplicationController
 			@item.kashflow = @kashflow
 		elsif @recurrence == "by month day" then
       @item = RecurrentItem.new
-			# stub out for now start and end dates
-			@item.start_date = Date.parse( params[:item][:trx_date] )
-			y = @item.start_date.year
-			@item.end_date = Date.new( y, 12, 31 )
+			@item.start_date = params[:item][:start_date]
+			@item.end_date   = params[:item][:end_date]
 			@item.save
-			@item.create_by_monthday( item_params )
+			@item.create_by_monthday( @kashflow, item_params )
+	  elsif @recurrence == "by week day" then
+      @item = RecurrentItem.new
+			@item.start_date = params[:item][:start_date]
+			@item.end_date   = params[:item][:end_date]
+			@item.save
+			week_day = params[:item][:week_day].to_i
+			nth = params[:item][:nth].to_i
+	    @item.create_by_weekday( @kashflow, item_params, week_day, nth )
     end
 
     respond_to do |format|

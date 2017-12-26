@@ -17,10 +17,26 @@
 //= require_tree .
 
 $(document).ready( function() {
-  $('#hook').mouseover( function() {
-    alert( 
-      "hello Tsvi from jquery" + "\n" +
-       JSON.stringify( $('#hook').data() )
-		);
-  } )
+  $('select[name="item[recurrence]"').change(function(){
+    if ($(this).val() == "ordinary") {
+        // alert("select ordinary item");
+				$("div#ordinary").css( "display", "inline");
+				$("div#recurrent").css( "display", "none");
+				$("div#week_day").css( "display", "none");
+    } else if ( $(this).val() == "by month day" ) {
+        // alert( "recurrent item by month day" ); 
+				$("div#ordinary").css( "display", "none");
+				$("div#recurrent").css( "display", "inline");
+				$("div#week_day").css( "display", "none");
+    } else if ( $(this).val() == "by week day" ) {
+    		//  alert( "recurrent item by week day" ); 
+				$("div#ordinary").css( "display", "none");
+				$("div#recurrent").css( "display", "inline");
+				$("div#week_day").css( "display", "inline");
+    }
+  }); 
 });
+
+// jquery css method
+// div style display : none vs. inline or block
+

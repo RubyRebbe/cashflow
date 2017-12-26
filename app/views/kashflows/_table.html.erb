@@ -8,6 +8,7 @@
 			<th> balance </th>
 			<th> Edit </th>
 			<th> Destroy </th>
+			<th> Recurrent </th>
 		</tr>
 	</thead>
 	<% @range.each do |item| %>
@@ -29,12 +30,24 @@
 
 			<td> <%= link_to "Edit", edit_item_path( item ) %> </td>
 			<td> <%= link_to "X", item, method: :delete, data: { confirm: 'Are you sure?' } %> </td>
+			<td> 
+				<%= 
+					item.recurrent? ? 
+					link_to( "by month day", item.recurrent_item, method: :delete ) : 
+						"ordinary"
+				%> 
+			</td>
 		</tr>
 	<% end %>
 		<tr style="color:purple">
 			<td> 
-				<%= link_to "create a new item", new_item_path( kashflow_id: @kashflow.id) %> 
+    		<%= 
+    			link_to( "create a new item", 
+						new_item_path( :kashflow_id =>  @kashflow.id, :end_date => @end_date )
+					)
+				%> 
 			</td>
+			<td>  </td>
 			<td>  </td>
 			<td>  </td>
 			<td>  </td>

@@ -13,19 +13,51 @@
 
   <div class="field">
     <%= form.label :recurrence, "recurrence" %>
-		<%= form.select :recurrence, 
-      [[ "ordinary", "ordinary"], [ "by month day", "by month day"]]%>
+		<%= 
+      form.select :recurrence, 
+				[[ "ordinary", "ordinary"], 
+				[ "by month day", "by month day"], 
+				[ "by week day", "by week day"]]
+		%>
   </div>
 
   <div class="field">
     <%= form.label :trx_type, "item type" %>
-    <%= form.select :trx_type, [[ "expense", "expense"], [ "income", "income"]]%>
+		<%= 
+  		form.select :trx_type, 
+    	[[ "expense", "expense"], [ "income", "income"]]
+		%>
   </div>
 
-  <div class="field">
+  <div class="field" id="ordinary">
     <%= form.label :trx_date, "item date" %>
     <%= form.date_field :trx_date,
 	    min: @kashflow.min_date, max: @kashflow.max_date %>
+  </div>
+
+  <div class="field" id="recurrent" style="display:none">
+    <%= form.label :start_date %>
+    <%= form.date_field :start_date,
+	    min: @kashflow.min_date, max: @kashflow.max_date %>
+		<%= form.label :end_date %>
+		<%= form.date_field :end_date,
+	    min: @kashflow.min_date, max: @kashflow.max_date %>
+  </div>
+
+  <div class="field" id="week_day" style="display:none">
+    <%= form.label :week_day %>
+		<%= 
+  		form.select :week_day, 
+    	[[ "Sunday", 0], [ "Monday", 1],
+    	[ "Tuesday", 2], [ "Wednesday", 3],
+    	[ "Thursday", 4], [ "Friday", 5],
+    	[ "Saturday", 6]]
+		%>
+
+    <%= form.label :nth %>
+		<%= 
+			form.select :nth, (1..5).to_a.map { |i| [ i, i ] }
+		%>
   </div>
 
   <div class="field">
@@ -44,3 +76,4 @@
     <%= form.submit %>
   </div>
 <% end %>
+

@@ -39,16 +39,19 @@ class RecurrentItem < ApplicationRecord
 		}.find_all { |d| in_range?( d ) }
   end
 
-	def create_by_monthday( item_params )
+	def create_by_monthday( kashflow, item_params )
+    item_params[:kashflow] = kashflow
 		dates_by_monthday.each { |d| 
       item_params[:trx_date] = d
       items.create( item_params )
 		}
   end
 
-	def create_by_weekday( weekday, nth )
+	def create_by_weekday( kashflow, item_params, weekday, nth )
+    item_params[:kashflow] = kashflow
 		dates_by_weekday( weekday, nth ).each { |d| 
-      items.create( trx_date: d ) 
+      item_params[:trx_date] = d
+      items.create( item_params )
 		}
   end
 

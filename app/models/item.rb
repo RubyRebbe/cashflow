@@ -40,6 +40,6 @@ class Item < ApplicationRecord
   end
 
 	def recurrent?
-		!recurrent_item.nil?
+		!recurrent_item.blank?
   end
 end
