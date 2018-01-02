@@ -22,4 +22,7 @@
 
 .byebug_history
 
+# vim files
 *.swp
+*.swo
+*.swm
