@@ -11,22 +11,27 @@
 			<th> Recurrent </th>
 		</tr>
 	</thead>
-	<% @range.each do |item| %>
-		<% if item.trx_type == "expense" then %>
-		<tr style="color:red">
-		<% else %>
-		<tr style="color:green">
-		<% end %>
-			<td> <%= item.trx_type %> </td>
-			<td> <%= item.trx_date %> </td>
-			<td> <%= item.amount %> </td>
-			<td> <%= item.name %> </td>
 
-			<% if item.balance > 0 then %>
-			  <td style="color:green" %> <%= item.balance %> </td>
-			<% else %>
-			  <td style="color:red" %> <%= item.balance %> </td>
-			<% end %>
+	<% @presentation.each do |h| %>
+    <tr>
+    <td> </td>
+    <td> 
+			<b> <%= h[:month_name] + " " + @kashflow.year.to_s %> </b>
+		</td>
+    <td> </td>
+    <td> </td>
+    <td> </td>
+    <td> </td>
+    <td> </td>
+    <td> </td>
+    </tr>
+
+		<% h[:items].each do |item| %>
+		<%= item.tr %>
+
+		  <%= item.to_row %>
+
+			<%= item.colored_balance %>
 
 			<td> <%= link_to "Edit", edit_item_path( item ) %> </td>
 			<td> <%= link_to "X", item, method: :delete, data: { confirm: 'Are you sure?' } %> </td>
@@ -39,7 +44,8 @@
 			</td>
 		</tr>
 	<% end %>
-		<tr style="color:purple">
+	<% end %>
+		<tr>
 			<td> 
     		<%= 
     			link_to( "create a new item", 

@@ -77,4 +77,11 @@ describe Month do
 		months.map { |m| m.nth_xday( x , 3).day }.should == expected
 
   end
+
+	it "can map day in month to [ week index, day in week index ]" do
+		[ 1, 3, 10, 17, 24 ].map { |day|
+      print "#{day}:  "
+	    pp  @month.day_to_wdiw( day )
+    }
+  end
 end

@@ -39,6 +39,38 @@ class Item < ApplicationRecord
     "#{trx_type} | #{trx_date} | #{amount} | #{name}"
   end
 
+  # html helper
+	def to_row
+    [
+	    trx_type,
+      trx_date,
+			"%.2f" % amount,
+		  name
+		].reduce( "" ) { |s,e| s + "\n" + td( e ) }.html_safe
+  end
+
+  def td( s, options = "" )
+	  "<td #{options}>  #{s} </td>"
+  end
+
+	def tr
+		( '<tr style="color:' + color + '">' ).html_safe
+  end
+
+	def colored_balance
+			b = "%.2f" % balance
+			color = ( balance > 0 ) ? "green" : "red"
+			td( b, 'style="color:' + color  + '"' ).html_safe
+  end
+
+	def color
+		if trx_type == "expense" then
+		  "red"
+		else
+		  "green"
+    end
+  end
+
 	def recurrent?
 		!recurrent_item.blank?
   end

@@ -1,3 +1,5 @@
+<% require "./lib/presentation_month.rb" %>
+
 <p id="notice"><%= notice %></p>
 
 <h1> Cashflow for year <%= @kashflow.year %> </h1>
@@ -24,26 +26,29 @@
 
 <% view_toggle = params[:view].blank? ? "table" : params[:view] %>
 <% if view_toggle == "table" then %>
-<h2> Cashflow Items: <%= @range.length %> . <%= @title %> </h2>
+<h2> Cashflow Items: <%= @title %> </h2>
 
 <%= render partial: 'table'  %>
 <% else %>
 
 <h2> Cashflow month view </h2>
 
-<% @months.each { |month| %>
+<% @presentation.each { |mh| %>
+	<% month = PresentationMonth.new( mh ) %>
   <%= render partial: 'kmonth', locals: { month: month } %>
 <% } %>
 
 <% end  %>
 
 <hr>
-<b> Balance </b> over date range:  <%= @kashflow.balance( @range ) %>
+<b> Balance </b> over date range:  
+<%= "%.2f" % @presentation.last[:items].last.balance %>
 
 <hr>
 First item for which balance <= 0:
 <br />
-<%= @kashflow.threshold( @range).to_s %>
+TBD: 
+@kashflow.threshold( @range).to_s
 
 <hr>
 

@@ -40,6 +40,16 @@ class Month
 		Array.new(k) + grab( DPW - k, @days )
   end
 
+	# map day in month to ( week, day in week )
+	def day_to_wdiw( day )
+		k = offset( first_day.cwday )
+		d = day + k - 1
+		w = d / DPW
+		diw = d % DPW
+
+		[ w, diw ]
+  end
+
 	def offset( cwday )
     cwday % DPW
   end

@@ -24,11 +24,47 @@ class Kashflow < ApplicationRecord
     end
   end
 
+	# m is integer 1..12
+	def items_by_month( m, offset = 0 )
+		start_date = Date.new( year, m, 1 )
+		end_date = Date.new( year, m, -1 )
+    items.order( :trx_date).where( trx_date: start_date..end_date )
+  end
+
+	def set_balance( items, offset = 0)
+    b = offset
+		items.each { |i|
+      b = b + i.signed_amount 
+			i.balance = b
+    }
+		b
+  end
+
 	def month_range( start_date, end_date )
     k =  start_date.nil? ? 1 : start_date.month
 		m =  end_date.nil? ? 12 : end_date.month
 
 		k..m
+  end
+
+	def presentation_model( start_date, end_date )
+		l = month_range( start_date, end_date ).to_a.map { |m|
+      {
+				month_name: Date::MONTHNAMES[m],
+				items: items_by_month( m)
+      }
+    }
+
+		# set item balances
+    b = 0
+		l.each { |m|
+			m[:items].each { |i|
+        b = b + i.signed_amount
+				i.balance = b
+      }
+    }
+
+		l
   end
 
   # balance over a date range of items
