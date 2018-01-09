@@ -15,7 +15,7 @@
 	<% @presentation.each do |h| %>
     <tr>
     <td> </td>
-    <td> 
+		<td class="month" id=<%= h[:month_name] %>  > 
 			<b> <%= h[:month_name] + " " + @kashflow.year.to_s %> </b>
 		</td>
     <td> </td>
@@ -25,6 +25,8 @@
     <td> </td>
     <td> </td>
     </tr>
+
+		<div class="month" id=<%= h[:month_name] %> >
 
 		<% h[:items].each do |item| %>
 		<%= item.tr %>
@@ -44,6 +46,9 @@
 			</td>
 		</tr>
 	<% end %>
+
+	</div>
+
 	<% end %>
 		<tr>
 			<td> 

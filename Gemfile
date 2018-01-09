@@ -67,4 +67,6 @@ end
 # user authentication
 gem 'authlogic'
 
+gem 'yaml_db'
+
 gem 'jquery-rails', '~> 4.3', '>= 4.3.1'
