@@ -35,6 +35,17 @@ $(document).ready( function() {
 				$("div#week_day").css( "display", "inline");
     }
   }); 
+
+  $("p.month").click( function() {
+    var m = $(this).text().trim();
+    $( "table.month#" + m ).toggle();
+  });
+
+  $("td.month").click( function() {
+    var m = $(this).attr( "id" );
+    alert( "month: " + m );
+    $( "div.month#" + m ).toggle();
+  });
 });
 
 // jquery css method
